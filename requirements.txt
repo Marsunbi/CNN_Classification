@@ -1,4 +1,4 @@
 keras
-tensorflow-gpu
+tensorflow
 h5py
 pillow
