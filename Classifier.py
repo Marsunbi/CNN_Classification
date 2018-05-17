@@ -1,7 +1,9 @@
 from keras.models import Sequential
 from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 from keras import backend as keras_backend
-from keras.preprocessing.image import ImageDataGenerator
+from keras.preprocessing.image import load_img, img_to_array
+import numpy as np
+import os
 
 image_path = R'data'
 training_data_dir = R'data/training_set'
@@ -43,3 +45,13 @@ model.load_weights(R'weights/weights-improvement-11-0.83-LargerSeed.hdf5')
 
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
+input_dir = 'data/input/'
+input_images = [input_dir + i for i in os.listdir(input_dir)]
+
+for file in input_images:
+    image_to_classify = load_img(file, target_size=(image_height, image_width))
+    image_to_classify = img_to_array(image_to_classify)
+    image_to_classify = np.expand_dims(image_to_classify, axis=0)
+    prediction = model.predict(image_to_classify)
+    result = '{}: {:.10f} \n{}: {:.10f}\n'.format('Cat', prediction[0][0], 'Dog', prediction[0][1])
+    print(result)
