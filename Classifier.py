@@ -53,5 +53,7 @@ for file in input_images:
     image_to_classify = img_to_array(image_to_classify)
     image_to_classify = np.expand_dims(image_to_classify, axis=0)
     prediction = model.predict(image_to_classify)
-    result = '{}: {:.10f} \n{}: {:.10f}\n'.format('Cat', prediction[0][0], 'Dog', prediction[0][1])
+    result = '{}\n{}: {:.10f} \n{}: {:.10f}\n'.format(file, 'Cat', prediction[0][0], 'Dog', prediction[0][1])
     print(result)
+
+
